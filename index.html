@@ -2,9 +2,153 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>testing deploy</title>
+    <title>My Adventure!</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/master.css">
+    <script src="./assets/js/main.js" charset="utf-8"></script>
   </head>
   <body>
-    こんにちは！
+      <div id="register">
+        <div class="welcome-bar">
+          Welcome to The Kingdom of Vermillion!
+        </div>
+        <div id="name">
+          <label for="nama">O Brave Hero, May i know your name?</label>
+          <br>
+          <input type="text" id="nama" placeholder="Insert your name" oninput="cekNama(this.value)">
+          <div id="name_button" onclick="setNama()">
+            <span id="disp_nama"></span>
+          </div>
+        </div>
+        <div id="gender">
+          <label for="gender">please, choose your character's gender</label>
+          <br>
+          <input type="radio" name="gender" value="male" onclick="setGender(this.value)">Male
+          <input type="radio" name="gender" value="female" onclick="setGender(this.value)">Female
+        </div>
+      </div>
+      <div id="narration">
+        <div class="npc_character">
+          <div class="npc_img">
+            <img src="./assets/images/characters/mordred.png" alt="" id="npc_img">
+          </div>
+          <div class="npc_info">
+            <div class="npc_namebar">
+              <div id="npc_name">
+              </div>
+            </div>
+            <div class="npc_chatbar">
+              <div id="npc_chats">
+              </div>
+            </div>
+            <div class="continue_chats" onclick="continue_chats()">
+              Click to Continue
+            </div>
+          </div>
+        </div>
+        <div class="player_character">
+          <div class="player_img">
+            <img src="" alt="" id="player_img">
+          </div>
+          <div class="player_info">
+            <div class="player_namebar">
+              <div id="player_name">
+              </div>
+            </div>
+            <div class="player_chatbar">
+              <div id="player_chats">
+              </div>
+            </div>
+            <div class="continue_chats" onclick="continue_chats()">
+              Click to Continue
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="battle_screen">
+        <div class="battle_panel">
+          <div class="health_container">
+            <div class="health_bar" id="player_health_bar">
+              <div class="health_info" id="player_health">
+              </div>
+            </div>
+          </div>
+          <div class="character_sprite">
+            <div class="character_image">
+              <img src="" alt="Character" id="character_image_sprite">
+            </div>
+          </div>
+        </div>
+        <div class="battle_panel">
+          <div class="battle_log_container">
+            <div class="battle_log">
+              <div class="battle_log_cover">
+                <div class="battle_log_message">
+                  Please select your action by clicking one of these button below
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="character_stats">
+            <div class="stat">
+              <div id="atk">
+              </div>
+            </div>
+            <div class="stat">
+              <div id="def">
+              </div>
+            </div>
+          </div>
+          <div class="action_panel">
+            <abbr title="Attack">
+              <div class="action_button" id="atk_button" onclick="battle('attack')">
+                <img src="./assets/images/attack.png" alt="attack">
+              </div>
+            </abbr>
+            <abbr title="Defend">
+                <div class="action_button" id="def_button" onclick="battle('defend')">
+                  <img src="./assets/images/defend.png" alt="defend">
+                </div>
+            </abbr>
+            <abbr title="Heal">
+                <div class="action_button" id="heal_button" onclick="battle('heal')">
+                  <img src="./assets/images/heal.png" alt="heal">
+                </div>
+            </abbr>
+          </div>
+          <div class="retry_panel">
+            <abbr title="Start Over">
+                <div class="action_button" id="retry_button" onclick="retry()">
+                  <div class="triangle">
+                  </div>
+                </div>
+            </abbr>
+          </div>
+        </div>
+        <div class="battle_panel">
+          <div class="health_container">
+            <div class="health_bar" id="enemy_health_bar">
+              <div class="health_info" id="enemy_health">
+              </div>
+            </div>
+          </div>
+          <div class="character_sprite">
+            <div class="character_image">
+              <img src="./assets/images/characters/skeletonLancer.png" alt="" class="center">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="footer_content">
+          All assets credits goes to their respectful owners |
+          <a href="https://www.youtube.com/channel/UCFEWoquCkriajet_s5CyIhA">Attack Sound Effect</a> |
+          <a href="http://typemoon.com/">Characters</a> |
+          <a href="https://www.jp.square-enix.com/">Battle & Game Over BGM</a> |
+          <a href="https://www.youtube.com/channel/UCLLnIcQll56hJ89dDin4UcA">Narration BGM</a> |
+          <a href="https://www.english-heritage.org.uk/learn/histories/medieval-castles/">Background Image</a>
+        </div>
+      </div>
   </body>
 </html>

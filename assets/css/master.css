@@ -1,0 +1,398 @@
+body{
+  background:url('../images/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top:4%;
+  margin-left:0;
+}
+
+div#register{
+  margin-left:auto;
+  margin-right:auto;
+  width:100%;
+  height:100%;
+}
+
+div#register div.welcome-bar{
+  padding-top:4%;
+  width:100%;
+  text-align: center;
+  font-size:4em;
+  font-family:'Open Sans';
+}
+
+div#register div#name {
+  padding-top:2%;
+  width:100%;
+  text-align: center;
+  font-size:1em;
+  font-family:'Open Sans';
+}
+
+div#name_button{
+  display:none;
+  margin-top:5px;
+  margin-left:auto;
+  margin-right:auto;
+  width:175px;
+  /* height:14px; */
+  background:white;
+}
+
+div#name_button:hover{
+  cursor:pointer;
+}
+
+div#register div#name input#nama{
+  width:150px;
+}
+div#register div#gender {
+  padding-top:2%;
+  width:100%;
+  text-align: center;
+  font-size:1em;
+  font-family:'Open Sans';
+  display:none;
+}
+
+div#register div#gender input#gender{
+  width:150px;
+}
+
+div#narration{
+  width:100%;
+  /* height:100%; */
+  /* background:white; */
+  /* display:none; */
+}
+
+div#narration div.npc_character {
+  width:40%;
+  height:300px;
+  display:none;
+  /* background:rgba(255, 255, 255, 0.52); */
+}
+
+div#narration div.npc_character *{
+  /* display:inline-block; */
+  float:left;
+}
+
+div#narration div.npc_character div.npc_img{
+  height:100%;
+  width:238px;
+  background:rgba(255, 255, 255, 0.41)
+}
+
+div#narration div.npc_character div.npc_info {
+  height:100%;
+  width:60%;
+  background:rgba(255, 255, 255, 0.41)
+}
+
+div#narration div.npc_character div.npc_img img#npc_img{
+  height:100%;
+}
+
+div#narration div.npc_character div.npc_namebar {
+  margin-top:30%;
+  width:100%;
+  height:50px;
+  /* background:rgb(0, 0, 0); */
+  color:white;
+  font-size:2.4em;
+  font-family: 'Open Sans';
+}
+
+div#narration div.npc_character div.npc_namebar div#npc_name {
+  background:rgb(0, 0, 0);
+  border:1px double rgb(255, 0, 0);
+}
+
+div#narration div.npc_character div.npc_chatbar {
+  width:100%;
+  height:80px;
+  overflow-y:scroll;
+  background:rgb(0, 0, 0);
+  color:white;
+  font-size:1.3em;
+  font-family: 'Open Sans';
+}
+
+div#narration div.npc_character div.npc_chatbar div#npc_chats {
+  background:rgb(0, 0, 0);
+  /* border:1px double rgb(255, 0, 0); */
+}
+
+div#narration div.npc_character div.continue_chats {
+  width:100%;
+  text-align:center;
+  background:rgb(242, 242, 242);
+  border:1px solid rgb(210, 210, 210);
+  font-size: 1.3em;
+  /* border:1px double rgb(255, 0, 0); */
+}
+
+div#narration div.npc_character div.continue_chats:hover {
+  cursor: pointer;
+  background:rgb(162, 196, 255);
+  color:rgb(255, 255, 255);
+}
+
+div#narration div.player_character {
+  width:40%;
+  height:300px;
+  float:right;
+  display:none;
+  /* background:rgba(255, 255, 255, 0.52); */
+}
+
+div#narration div.player_character *{
+  /* display:inline-block; */
+  float:right;
+}
+
+div#narration div.player_character div.player_img{
+  height:100%;
+  width:238px;
+  background:rgba(255, 255, 255, 0.41)
+}
+
+div#narration div.player_character div.player_info {
+  height:100%;
+  width:60%;
+  background:rgba(255, 255, 255, 0.41)
+}
+
+div#narration div.player_character div.player_img img#player_img{
+  height:100%;
+}
+
+div#narration div.player_character div.player_namebar {
+  margin-top:30%;
+  width:100%;
+  height:50px;
+  /* background:rgb(0, 0, 0); */
+  color:white;
+  font-size:2.4em;
+  font-family: 'Open Sans';
+}
+
+div#narration div.player_character div.player_namebar div#player_name {
+  background:rgb(0, 0, 0);
+  border:1px double rgb(255, 0, 0);
+}
+
+div#narration div.player_character div.player_chatbar {
+  width:100%;
+  height:80px;
+  overflow-y:scroll;
+  background:rgb(0, 0, 0);
+  color:white;
+  font-size:1.3em;
+  font-family: 'Open Sans';
+}
+
+div#narration div.player_character div.player_chatbar div#player_chats {
+  background:rgb(0, 0, 0);
+  /* border:1px double rgb(255, 0, 0); */
+}
+
+div#narration div.player_character div.continue_chats {
+  width:100%;
+  text-align:center;
+  background:rgb(242, 242, 242);
+  border:1px solid rgb(210, 210, 210);
+  font-size: 1.3em;
+  /* border:1px double rgb(255, 0, 0); */
+}
+
+div#narration div.player_character div.continue_chats:hover {
+  cursor: pointer;
+  background:rgb(162, 196, 255);
+  color:rgb(255, 255, 255);
+}
+
+div#battle_screen {
+  width:70%;
+  height:600px;
+  background:rgba(255, 255, 255, 0.43);
+  margin-left:auto;
+  margin-right:auto;
+  display:none;
+}
+div#battle_screen div.battle_panel {
+  display:inline-block;
+  width:33%;
+  height:100%;
+  /* background:rgb(101, 210, 0); */
+  overflow:hidden;
+}
+div#battle_screen div.battle_panel div.health_container {
+  width:100%;
+  height:10%;
+  background:white;
+  border:2px solid rgb(0, 255, 56);
+}
+
+div#battle_screen div.battle_panel div.health_container div.health_bar div.health_info {
+  font-size:3em;
+  position:absolute;
+}
+div#battle_screen div.battle_panel div.health_container div.health_bar {
+  width:100%;
+  height:100%;
+  background:rgb(0, 255, 56);
+  transition-duration: 0.3s;
+}
+div#battle_screen div.battle_panel div.character_sprite {
+  height:85%;
+  width:auto;
+}
+div#battle_screen div.battle_panel div.character_image {
+  width:100%;
+  height:105%;
+}
+
+div#battle_screen div.battle_panel div.character_sprite img {
+  height:100%;
+}
+
+div#battle_screen div.battle_panel div.character_sprite img.center{
+  width:100%;
+  height:auto;
+}
+
+div#battle_screen div.battle_panel div.battle_log_container {
+  width:100%;
+  height:60%;
+  background:black;
+  overflow-y:hidden;
+}
+
+div#battle_screen div.battle_panel div.battle_log_container div.battle_log {
+  height:100%;
+  width:100%;
+  padding-top:10px;
+  overflow-y:scroll;
+  transform :rotate(180deg)
+}
+div#battle_screen div.battle_panel div.battle_log_container div.battle_log div.battle_log_cover div.battle_log_message {
+  transform :rotate(180deg)
+}
+
+div#battle_screen div.battle_panel div.battle_log_container div.battle_log div.battle_log_message {
+  color:white;
+  margin:10px;
+}
+
+div#battle_screen div.battle_panel div.character_stats {
+  width:100%;
+  height:10%;
+  background:rgb(215, 215, 215);
+  padding:5px;
+}
+
+div#battle_screen div.battle_panel div.character_stats div.stat {
+  width:49%;
+  height:98%;
+  float:left;
+  font-size:2.3em;
+}
+
+div#battle_screen div.battle_panel div.character_stats div.stat div#def {
+  text-align:right;
+}
+
+div#battle_screen div.battle_panel div.action_panel {
+  width:100%;
+  height:30%;
+}
+
+div#battle_screen div.battle_panel div.action_panel div.action_button {
+  background:white;
+  width:30%;
+  height:80%;
+  float:left;
+  margin:5% 1.5% 5% 1.5%;
+  border-radius:100%;
+  transition-duration: 0.4s
+}
+
+div#battle_screen div.battle_panel div.action_panel div.action_button img{
+  width:100%;
+}
+
+div#battle_screen div.battle_panel div.action_panel div.action_button:hover{
+  background:rgb(188, 217, 230);
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+div#battle_screen div.battle_panel div.retry_panel {
+  width:100%;
+  height:30%;
+}
+
+div#battle_screen div.battle_panel div.retry_panel div.action_button {
+  position: relative;
+  background:white;
+  width:30%;
+  height:80%;
+  display:block;
+  margin:3% auto 0 auto;
+  border-radius:100%;
+  transition-duration: 0.4s;
+  overflow:hidden;
+}
+div#battle_screen div.battle_panel div.retry_panel div.action_button div.triangle{
+  clip-path: polygon(0 0, 0% 100%, 100% 53%);
+  width:40%;
+  height:40%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background:rgb(255, 176, 176);
+}
+div#battle_screen div.battle_panel div.retry_panel div.action_button img{
+  height:100%;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+div#battle_screen div.battle_panel div.retry_panel div.action_button:hover{
+  background:rgb(255, 215, 215);
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+div#battle_screen div.battle_panel div.retry_panel div.action_button:hover div.triangle{
+  background:#FFFFFF;
+}
+div.footer {
+  width:100%;
+  height:55px;
+  color:white;
+  background:black;
+  margin:0;
+  bottom: 0;
+  position: fixed;
+}
+
+div.footer div.footer_content {
+  margin-top:auto;
+  text-align:center;
+  padding-top:15px;
+}
+
+div.footer div.footer_content a {
+  color:white;
+  text-decoration: none;
+}
+div.footer div.footer_content a:hover{
+  color:rgb(252, 255, 187);
+  text-decoration: underline;
+}
