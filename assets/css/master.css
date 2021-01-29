@@ -446,9 +446,15 @@ div.footer {
   background:black;
   margin:0;
   bottom: 0;
-  position: fixed;
+  /* position: absolute; */
 }
 
+
+@media only screen and (min-height: 800px) {
+  div.footer {
+    position:fixed;
+  }
+}
 div.footer div.footer_content {
   margin-top:auto;
   text-align:center;

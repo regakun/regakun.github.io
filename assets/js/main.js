@@ -50,6 +50,15 @@ let enemy_stat = [{
   defense : 550,
   level : 10,
   crit : 5
+},{
+  name : 'Lancelot',
+  img : 'lancelot.png',
+  attack : 17000,
+  hp : 15000,
+  current_hp : 15000,
+  defense : 15550,
+  level : 100,
+  crit : 100
 }]
 
 let active_enemy = 0
@@ -153,12 +162,15 @@ function show_battle_stage(){
 }
 
 function battle(action){
+  let enemy_lv = enemy_stat[0].level;
   if (action === 'attack') {
     attack('player',enemy_last_action);
   }else if (action === 'heal') {
     heal();
   }
-  enemy_action(action);
+  if (enemy_lv === enemy_stat[0].level) {
+    enemy_action(action);
+  }
   refreshHealth('player')
   refreshHealth('enemy')
 }
@@ -211,7 +223,18 @@ function attack(char, last_act = null){
       printLog(`you have defeated Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} !`)
       printLog('proceeding to exploring further area')
       upgradeLevel();
-      printLog(`Lv ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} Appeared ! Prepare for Battle!`)
+      if (enemy_stat[0].level > 100) {
+        printLog(`CONGRATULATIONS HERO ${nama}!! YOU BEAT THE GAME !!!!`,3)
+        document.getElementsByClassName('action_panel')[0].style.display = 'none'
+        document.getElementsByClassName('retry_panel')[0].style.display = 'block'
+      }else{
+        if (active_enemy === 2) {
+          printLog(`Finally you reached the BOSS STAGE!`,2)
+          printLog(`LAST BOSS Lv ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} Appeared ! Prepare for Battle!`)
+        }else{
+          printLog(`Lv ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} Appeared ! Prepare for Battle!`)
+        }
+      }
     }
   }else{
     let critical = false;
@@ -309,7 +332,11 @@ function upgradeLevel() {
     }
   }
   if (enemy_stat[0].level % 10 === 0) {
-    active_enemy = 1
+    if (enemy_stat[0].level === 100) {
+      active_enemy = 2
+    }else{
+      active_enemy = 1
+    }
     if (enemy_stat[0].level !== 10) {
       enemy_stat[1].level += 10
       for (var key in enemy_stat[1]) {
@@ -348,6 +375,10 @@ function printLog(message, crit=null) {
   report.className = "battle_log_message";
   if (crit === 1) {
     report.style.cssText = 'background:rgb(255, 88, 88)';
+  }else if (crit === 2) {
+    report.style.cssText = 'background:rgb(171, 56, 56)';
+  }else if (crit === 3) {
+    report.style.cssText = 'background:rgb(137, 255, 122)';
   }
   report.innerHTML = message
   document.getElementsByClassName('battle_log_cover')[0].insertBefore(report, document.getElementsByClassName('battle_log_message')[0])
