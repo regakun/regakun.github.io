@@ -219,7 +219,7 @@ div#battle_screen {
   background:rgba(255, 255, 255, 0.43);
   margin-left:auto;
   margin-right:auto;
-  display:none;
+  /* display:none; */
 }
 div#battle_screen div.battle_panel {
   display:inline-block;

@@ -39,14 +39,26 @@ let player_stat = {
   crit : 2
 }
 
-let enemy_stat = {
+let enemy_stat = [{
+  name : 'Skeleton Lancer',
+  img : 'skeletonLancer.png',
   attack : 30,
   hp : 100,
   current_hp : 100,
   defense : 20,
   level : 1,
-}
+},{
+  name : 'Efreet',
+  img : 'efreet.png',
+  attack : 700,
+  hp : 1000,
+  current_hp : 1000,
+  defense : 550,
+  level : 10,
+  crit : 5
+}]
 
+let active_enemy = 0
 let enemy_last_action;
 
 function cekNama(value){
@@ -132,6 +144,7 @@ function continue_chats(){
 
 function show_battle_stage(){
   document.getElementById('character_image_sprite').src = `./assets/images/characters/character_${gender}_sprite.png`
+  document.getElementById('enemy_image_sprite').src = `./assets/images/characters/skeletonLancer_sprite.png`
   document.getElementById('register').style.display = 'none'
   document.getElementById('narration').style.display = 'none'
   document.getElementById('battle_screen').style.display = 'block'
@@ -152,6 +165,7 @@ function battle(action){
     heal();
   }
   enemy_action(action);
+  // console.log(active_enemy)
   refreshHealth('player')
   refreshHealth('enemy')
 }
@@ -167,11 +181,11 @@ function attack(char, last_act = null){
       critical = true
     }
     if (!enemy_last_action || enemy_last_action === 'defend') {
-      dmg -= enemy_stat.defense
+      dmg -= enemy_stat[active_enemy].defense
       if (dmg <= 0) {
-        printLog(`Lv. ${enemy_stat.level} Skeleton Lancer Evaded ${nama}'s Attack!`)
+        printLog(`Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} Evaded ${nama}'s Attack!`)
       }else{
-        enemy_stat.current_hp -= dmg
+        enemy_stat[active_enemy].current_hp -= dmg
         if (critical === true) {
           printLog(`${nama} dealt ${dmg} CRITICAL DAMAGE!`,1)
         }else{
@@ -182,15 +196,15 @@ function attack(char, last_act = null){
         hitsound.volume = 0.4;
       }
     }
-    if (enemy_stat.current_hp <= 0) {
-      printLog(`you have defeated Lv. ${enemy_stat.level} Skeleton Lancer !`)
+    if (enemy_stat[active_enemy].current_hp <= 0) {
+      printLog(`you have defeated Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} !`)
       printLog('proceeding to exploring further area')
       upgradeLevel();
-      printLog(`Lv ${enemy_stat.level} Skeleton Lancer Appeared ! Prepare for Battle!`)
+      printLog(`Lv ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} Appeared ! Prepare for Battle!`)
     }
   }else{
     let dmg = Math.floor((Math.random() * player_stat.attack) + 1);
-    if (enemy_stat.level === 10) {
+    if (enemy_stat[active_enemy].level === 10) {
       let crit =Math.floor((Math.random() * 100) + 1);
       crit = false;
       if (crit>50) {
@@ -201,17 +215,17 @@ function attack(char, last_act = null){
     if (!last_act || last_act === null || last_act === 'defend') {
       dmg -= player_stat.defense
       if (dmg <= 0) {
-        printLog(`${nama} Evaded Lv. ${enemy_stat.level} Skeleton Lancer's Attack!`)
+        printLog(`${nama} Evaded Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name}'s Attack!`)
       }else{
         player_stat.current_hp -= dmg
-        printLog(`Lv. ${enemy_stat.level} Skeleton Lancer dealt ${dmg} damage!`)
+        printLog(`Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} dealt ${dmg} damage!`)
         let hitsound = new Audio('./assets/sound/attack.mp3');
         hitsound.play()
         hitsound.volume = 0.4
       }
     }else{
       player_stat.current_hp -= dmg
-      printLog(`Lv. ${enemy_stat.level} Skeleton Lancer dealt ${dmg} damage!`)
+      printLog(`Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} dealt ${dmg} damage!`)
       let hitsound = new Audio('./assets/sound/attack.mp3');
       hitsound.play()
       hitsound.volume = 0.4
@@ -253,7 +267,7 @@ function heal(){
 
 function upgradeLevel() {
   player_stat.level++;
-  enemy_stat.level++;
+  enemy_stat[0].level++;
   for (var key in player_stat) {
     if (key !== 'level' && key !== 'crit') {
       player_stat[key] += 15
@@ -261,22 +275,39 @@ function upgradeLevel() {
       player_stat[key] += 1
     }
   }
-  for (var key in enemy_stat) {
-    if (key !== 'level') {
-      if (enemy_stat.level % 10 === 0) {
-        enemy_stat[key] += 100
-        if (enemy_stat.crit) {
-          enemy_stat.crit += 10
+  for (var key in enemy_stat[0]) {
+    if (key !== 'level' && key !== 'name' && key !== 'img') {
+      if (enemy_stat[0].level % 10 === 0) {
+        enemy_stat[0][key] += 100
+        if (enemy_stat[0].crit) {
+          enemy_stat[0].crit += 10
         }else{
-          enemy_stat['crit'] = 10
+          enemy_stat[0]['crit'] = 10
         }
       }else{
-        enemy_stat[key] += 23
+        enemy_stat[0][key] += 50
       }
     }
   }
+  if (enemy_stat[0].level % 10 === 0) {
+    active_enemy = 1
+    if (enemy_stat[0].level !== 10) {
+      enemy_stat[1].level += 20
+      for (var key in enemy_stat[1]) {
+        if (key !== 'level' && key !== 'name' && key !== 'img') {
+          enemy_stat[1][key] += 1000
+        }
+      }
+      enemy_stat[1]['crit'] += 7
+    }
+  }else{
+    active_enemy = 0
+  }
   player_stat.current_hp = player_stat.hp
-  enemy_stat.current_hp = enemy_stat.hp
+  for (var i = 0; i < enemy_stat.length; i++) {
+    enemy_stat[i].current_hp = enemy_stat[i].hp
+  }
+  document.getElementById('enemy_image_sprite').src=`./assets/images/characters/${enemy_stat[active_enemy].img}`
   document.getElementById('atk').innerHTML =`ATK : ${player_stat.attack}`
   document.getElementById('def').innerHTML =`DEF : ${player_stat.defense}`
 }
@@ -286,7 +317,7 @@ function refreshHealth(subject){
   if (subject === 'player') {
     stat = player_stat
   }else{
-    stat = enemy_stat
+    stat = enemy_stat[active_enemy]
   }
 
   document.getElementById(`${subject}_health`).innerHTML = `${stat.current_hp} / ${stat.hp}`
