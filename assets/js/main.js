@@ -144,7 +144,7 @@ function continue_chats(){
 
 function show_battle_stage(){
   document.getElementById('character_image_sprite').src = `./assets/images/characters/character_${gender}_sprite.png`
-  document.getElementById('enemy_image_sprite').src = `./assets/images/characters/skeletonLancer_sprite.png`
+  document.getElementById('enemy_image_sprite').src = `./assets/images/characters/skeletonLancer.png`
   document.getElementById('register').style.display = 'none'
   document.getElementById('narration').style.display = 'none'
   document.getElementById('battle_screen').style.display = 'block'
@@ -165,7 +165,6 @@ function battle(action){
     heal();
   }
   enemy_action(action);
-  // console.log(active_enemy)
   refreshHealth('player')
   refreshHealth('enemy')
 }
@@ -195,6 +194,24 @@ function attack(char, last_act = null){
         hitsound.play()
         hitsound.volume = 0.4;
       }
+    }else{
+      let def = Math.floor((Math.random() * enemy_stat[active_enemy].defense) + 1);
+      if (!critical) {
+        dmg -= def
+      }
+      if (dmg <= 0) {
+        printLog(`Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} Evaded ${nama}'s Attack!`)
+      }else{
+        enemy_stat[active_enemy].current_hp -= dmg
+        if (critical === true) {
+          printLog(`${nama} dealt ${dmg} CRITICAL DAMAGE!`,1)
+        }else{
+          printLog(`${nama} dealt ${dmg} damage!`)
+        }
+        let hitsound = new Audio('./assets/sound/attack.mp3');
+        hitsound.play()
+        hitsound.volume = 0.4;
+      }
     }
     if (enemy_stat[active_enemy].current_hp <= 0) {
       printLog(`you have defeated Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} !`)
@@ -203,10 +220,10 @@ function attack(char, last_act = null){
       printLog(`Lv ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} Appeared ! Prepare for Battle!`)
     }
   }else{
+    let critical = false;
     let dmg = Math.floor((Math.random() * player_stat.attack) + 1);
     if (enemy_stat[active_enemy].level === 10) {
       let crit =Math.floor((Math.random() * 100) + 1);
-      crit = false;
       if (crit>50) {
         dmg = dmg*player_stat.crit
         critical = true
@@ -224,8 +241,16 @@ function attack(char, last_act = null){
         hitsound.volume = 0.4
       }
     }else{
-      player_stat.current_hp -= dmg
-      printLog(`Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} dealt ${dmg} damage!`)
+      let def = Math.floor((Math.random() * player_stat.defense) + 1);
+      if (!critical) {
+        dmg -= def
+      }
+      if (dmg <= 0) {
+        printLog(`${nama} Evaded Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name}'s Attack!`)
+      }else{
+        player_stat.current_hp -= dmg
+        printLog(`Lv. ${enemy_stat[active_enemy].level} ${enemy_stat[active_enemy].name} dealt ${dmg} damage!`)
+      }
       let hitsound = new Audio('./assets/sound/attack.mp3');
       hitsound.play()
       hitsound.volume = 0.4
@@ -292,7 +317,7 @@ function upgradeLevel() {
   if (enemy_stat[0].level % 10 === 0) {
     active_enemy = 1
     if (enemy_stat[0].level !== 10) {
-      enemy_stat[1].level += 20
+      enemy_stat[1].level += 10
       for (var key in enemy_stat[1]) {
         if (key !== 'level' && key !== 'name' && key !== 'img') {
           enemy_stat[1][key] += 1000
