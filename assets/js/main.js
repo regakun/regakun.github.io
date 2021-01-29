@@ -173,7 +173,7 @@ function attack(char, last_act = null){
       }else{
         enemy_stat.current_hp -= dmg
         if (critical === true) {
-          printLog(`${nama} dealt ${dmg} CRITICAL DAMAGE!`)
+          printLog(`${nama} dealt ${dmg} CRITICAL DAMAGE!`,1)
         }else{
           printLog(`${nama} dealt ${dmg} damage!`)
         }
@@ -191,8 +191,8 @@ function attack(char, last_act = null){
   }else{
     let dmg = Math.floor((Math.random() * player_stat.attack) + 1);
     if (enemy_stat.level === 10) {
-      crit = false;
       let crit =Math.floor((Math.random() * 100) + 1);
+      crit = false;
       if (crit>50) {
         dmg = dmg*player_stat.crit
         critical = true
@@ -293,9 +293,12 @@ function refreshHealth(subject){
   document.getElementById(`${subject}_health_bar`).style.width = (stat.current_hp / stat.hp *100)+'%'
 }
 
-function printLog(message) {
+function printLog(message, crit=null) {
   let report = document.createElement("div");
   report.className = "battle_log_message";
+  if (crit === 1) {
+    report.style.cssText = 'background:rgb(255, 88, 88)';
+  }
   report.innerHTML = message
   document.getElementsByClassName('battle_log_cover')[0].insertBefore(report, document.getElementsByClassName('battle_log_message')[0])
 }
