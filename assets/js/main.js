@@ -3,12 +3,6 @@ let gender
 let progress = [0,0]
 let first = 0;
 var audio;
-// var r = confirm("Allow us to play our background music for your fullest experience");
-// if (r == true) {
-//   var audio = new Audio('./assets/sound/music/idle.mp3');
-//   audio.play()
-//   audio.volume = 0.4;
-// }
 
 
 let narration_text = [
