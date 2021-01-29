@@ -324,10 +324,40 @@ div#battle_screen div.battle_panel div.character_stats {
 }
 
 div#battle_screen div.battle_panel div.character_stats div.stat {
-  width:49%;
+  width:30%;
   height:98%;
   float:left;
-  font-size:2.3em;
+  margin:auto 1.5% auto 1.5%;
+  text-align:center;
+}
+div#battle_screen div.battle_panel div.character_stats div#quit {
+  text-transform:uppercase;
+  transition-duration: 0.3s;
+}
+div#battle_screen div.battle_panel div.character_stats div#quit:hover {
+  background:rgb(227, 180, 180);
+  color:white;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  margin:0;
+}
+
+@media only screen and (max-width: 1600px) {
+  div#battle_screen div.battle_panel div.character_stats div.stat {
+    font-size: 1.5em
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  div#battle_screen div.battle_panel div.character_stats div.stat {
+    font-size: 1.8em
+  }
+}
+
+@media only screen and (min-width: 1601px) {
+  div#battle_screen div.battle_panel div.character_stats div.stat {
+      font-size:2.2em;
+  }
 }
 
 div#battle_screen div.battle_panel div.character_stats div.stat div#def {
